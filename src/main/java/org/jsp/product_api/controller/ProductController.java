@@ -15,68 +15,76 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 public class ProductController {
 
     @Autowired
     ProductService service;
 
-    // Saving one product
+    @Operation(summary = "Saving one product")
     @PostMapping("/products")
     public ResponseEntity<Object> saveProduct(@RequestBody Product product) {
         return service.saveProduct(product);
     }
 
-    // Save multiple records
+
+    @Operation(summary = "Save multiple records")
     @PostMapping("/products/many")
     public ResponseEntity<Object> saveProducts(@RequestBody List<Product> products) {
         return service.saveProducts(products);
     }
 
-    // Fetch All Products
+    @Operation(summary = "Fetch All Products")
     @GetMapping("/products")
     public ResponseEntity<Object> fetchAllProducts() {
         return service.fetchAllProducts();
     }
 
-    // Fetch by ID
+    @Operation(summary = "Fetch by ID")
     @GetMapping("/products/{id}")
     public ResponseEntity<Object> fetchById(@PathVariable int id) {
         return service.fetchById(id);
     }
 
-    // Fetch product by name
+    @Operation(summary = " Fetch product by name")
     @GetMapping("/products/name/{name}")
     public ResponseEntity<Object> fetchByName(@PathVariable String name) {
         return service.fetchByName(name);
     }
 
-    // Fetch products price greater than
+ 
+    @Operation(summary = "Fetch products price greater than")
     @GetMapping("/products/price/greater/{price}")
     public ResponseEntity<Object> fetchByGreaterThanEqual(@PathVariable double price) {
         return service.fetchByGreaterThanEqual(price);
     }
 
-    // Fetch products by stock range
+     
+    @Operation(summary = "Fetch products by stock range")
     @GetMapping("/products/stock/{min}/{max}")
     public ResponseEntity<Object> fetchByStockBetween(@PathVariable int min, @PathVariable int max) {
         return service.fetchByStockBetween(min, max);
     }
 
-    // Delete product by ID
+   
+    @Operation(summary = "  Delete product by ID")
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable int id) {
         return service.deleteById(id);
     }
 
 
-//Update Product - PUT
+
+    @Operation(summary = "Update Product - PUT")
 @PutMapping("/products")
 public ResponseEntity<Object> updateRecord(@RequestBody Product product){
 	return service.updateProduct(product);
 }
 
-//Update Product- PATCH
+
+    @Operation(summary = "Update Product- PATCH")
 @PatchMapping("/products/{id}")
 public ResponseEntity<Object> updateRecord(@PathVariable int id,@RequestBody Product product){
 	return service.updateProduct(id,product);
